@@ -1,0 +1,14 @@
+C:\Users\Axel\Documents\c#\ev2pt2\bin\Debug\net7.0\ev2pt2.exe
+C:\Users\Axel\Documents\c#\ev2pt2\bin\Debug\net7.0\ev2pt2.deps.json
+C:\Users\Axel\Documents\c#\ev2pt2\bin\Debug\net7.0\ev2pt2.runtimeconfig.json
+C:\Users\Axel\Documents\c#\ev2pt2\bin\Debug\net7.0\ev2pt2.dll
+C:\Users\Axel\Documents\c#\ev2pt2\bin\Debug\net7.0\ev2pt2.pdb
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.AssemblyInfoInputs.cache
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.AssemblyInfo.cs
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.csproj.CoreCompileInputs.cache
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.dll
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\refint\ev2pt2.dll
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.pdb
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ev2pt2.genruntimeconfig.cache
+C:\Users\Axel\Documents\c#\ev2pt2\obj\Debug\net7.0\ref\ev2pt2.dll
