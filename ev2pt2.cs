@@ -29,7 +29,12 @@ namespace ev2pt2
             Console.WriteLine("funcion de María");
             var mariax1 = minimoscuadradosx(mariax, mariat);
             var mariax2 = minimoscuadradosx2(mariax, mariat);
-            Console.WriteLine("y(t) = {0} * cos(t/8) + {1} * e^(t/10)", mariax1, mariax2 + " \n");
+            Console.WriteLine("y(t) = {0} * cos(t/8) + {1} * e^(t/10)", mariax1, mariax2);
+            Console.WriteLine("");
+
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Ecuaciones no lineales");
+            ecuacionesnolineales(anibalx1, anibalx2, mariax1, mariax2);
 
         }
 
@@ -188,6 +193,67 @@ namespace ev2pt2
                 }
             }
             return matriz[1, incognitas];
+        }
+
+
+        //método para el sistema de ecuaciones no lineales que indique en qué momento los dos bebés tendrán la misma estatura, por primera vez
+        static void ecuacionesnolineales(double ax1, double ax2, double mx1, double mx2){
+        int ren = 2, col = ren + 1;
+        double[,] matriz = new double[ren, col];
+        double x = 4, y = 57, criterio = 0.00001;
+        double pivote, factor;
+        double funcionanibal = 1, funcionmaria = 1;
+        while( Math.Abs(funcionanibal) > criterio  || Math.Abs(funcionmaria)>criterio){
+            funcionanibal = ax1 * Math.Log(x) + ax2 -y;
+            funcionmaria =  mx1 * Math.Cos(x/8) + mx2 * Math.Exp(x/10) -y;
+            //PRIMERA FUNCION
+            matriz[0,0] = ax1 / x; //ADAPTAR
+            matriz[0,1] = -1; //ADAPTAR
+            matriz[0,2] = -funcionanibal; //ADAPTAR
+
+            //SEGUNDA FUNCION
+            matriz[1,0] = mx1 * (-1/8) * Math.Sin(x/8) + mx2 * (1/10) * Math.Exp(x/10); //ADAPTAR 
+            matriz[1,1] = -1;//ADAPTAR
+            matriz[1,2] = -funcionmaria;//ADAPTAR
+            
+            // INICIA GAUSS
+            //ESTRUCTURA PARA RECORRER MATRIZ
+            
+            for (int i = 0; i < ren; i++) //PARA RECORRER RENGLONES
+            {
+            
+                //SELECCIONAR PIVOTE
+                pivote = matriz[ i ,  i ];
+            
+                for (int j = 0; j < col; j++)//PARA RECORRER COLUMNAS
+                {
+            
+                    //OPERACION PARA DIVIDIR TODAS LAS CASILLAS DE ESE RENGLON ENTRE EL PIVOTE
+                    matriz[i, j] = matriz[i, j] / pivote; //matriz[i,j] /= pivote
+                }
+                
+                //VOLVER A RECORRER LA MATRIZ PARA HACER CERO (RESTA) EL RESTO DE LA COLUMNA
+                for (int r = 0; r < ren; r++) //RECORRE RENGLONES
+                {
+                if(r!=i) //SI NO ES EL RENGLON DEL PIVOTE ENTONCES SE HACE LA RESTA
+                {
+                    //SELECCIONAR FACTOR
+                    factor = matriz[r , i ];
+                    for (int k = 0; k < col; k++) //RECORRER COLUMNAS
+                    {
+                        matriz[r, k] = matriz[r, k] - factor * matriz [ i , k ]; 
+                    }
+                }
+            }
+            }
+            //TERMINA GAUSS
+            // RECORRER COORDENADAS
+            x += matriz[0,2];
+            y += matriz[1,2];
+        }
+
+        //IMPRIMIR EL VALOR X y Y
+        Console.WriteLine("Los bebes tendran la misma estatura en el mes " + x + " con una estatura de " + y);
         }
 
 
