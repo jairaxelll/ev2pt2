@@ -41,8 +41,10 @@ namespace ev2pt2
             Console.WriteLine(biseccionanibal(anibalx1, anibalx2));
             Console.WriteLine(biseccionmaria(mariax1, mariax2));
 
-
-
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Secante");
+            Console.WriteLine(secanteAnibal(anibalx1, anibalx2));
+            Console.WriteLine(secanteMaria(mariax1, mariax2));
         }
 
         // Método de mínimos cuadrados para x1
@@ -336,9 +338,81 @@ namespace ev2pt2
 
             return "Raíz: "+ x_intermedia;
         }
+
+        //Metodo de la secante
         
+                public static String secanteAnibal(double x1, double x2)
+            {
+            Console.WriteLine("Metodo de secante para anibal");      
+            double y_inicial, x_inicial = 0, y_final , x_final = 0 , x_intermedia=1, y_intermedia=1, paso = 1, criterio = 0.0001;
+            do    
+            {
+            x_inicial = x_final; //AVANZA AL SIGUIENTE INTERVALO
+            y_inicial = x1 * Math.Log(x_inicial) + x2 - 60; //ADAPTAR
+            x_final = x_inicial + paso;
+            y_final = x1 * Math.Log(x_final) + x2 - 60; //ADAPTAR
+            }
+            while(y_inicial * y_final >0);
 
+            //BISECCION
+            while( Math.Abs(y_intermedia) > criterio)
+            {
+            //CALCULAR x_intermedia
+            x_intermedia = x_final - ( x_inicial - x_final) * y_final  / (y_inicial - y_final);
+            //CALUCLAR y_internedia
+            y_intermedia = x1 * Math.Log(x_intermedia) + x2 - 60; //ADAPTAR
 
+            //COMPARAR CON Y INICIAL O Y FINAL LA Y INTERMEDIA, PARA VALIDAR
+            if(y_final * y_intermedia > 0) //intermedia y final tienen el mismo signo
+            {
+                x_final = x_intermedia;
+                y_final = y_intermedia;
+            }
+            else
+            {
+                x_inicial = x_intermedia;
+                y_inicial = y_intermedia;
+            }
+            }
 
-    } 
+            return "Raíz: "+ x_intermedia;
+        } 
+
+                public static String secanteMaria(double x1, double x2)
+            {
+            Console.WriteLine("Metodo de secante para maria");      
+            double y_inicial, x_inicial = 0, y_final , x_final = 0 , x_intermedia=1, y_intermedia=1, paso = 1, criterio = 0.0001;
+            do    
+            {
+            x_inicial = x_final; //AVANZA AL SIGUIENTE INTERVALO
+            y_inicial = x1 * Math.Cos(x_inicial/8) + x2 * Math.Exp(x_inicial/10) - 60; //ADAPTAR
+            x_final = x_inicial + paso;
+            y_final = x1 * Math.Cos(x_final/8) + x2 * Math.Exp(x_final/10) - 60; //ADAPTAR
+            }
+            while(y_inicial * y_final >0);
+
+            //BISECCION
+            while( Math.Abs(y_intermedia) > criterio)
+            {
+            //CALCULAR x_intermedia
+            x_intermedia = x_final - ( x_inicial - x_final) * y_final  / (y_inicial - y_final);
+            //CALUCLAR y_internedia
+            y_intermedia = x1 * Math.Cos(x_intermedia/8) + x2 * Math.Exp(x_intermedia/10) - 60; //ADAPTAR
+
+            //COMPARAR CON Y INICIAL O Y FINAL LA Y INTERMEDIA, PARA VALIDAR
+            if(y_final * y_intermedia > 0) //intermedia y final tienen el mismo signo
+            {
+                x_final = x_intermedia;
+                y_final = y_intermedia;
+            }
+            else
+            {
+                x_inicial = x_intermedia;
+                y_inicial = y_intermedia;
+            }
+            }
+
+            return "Raíz: "+ x_intermedia;
+        } 
+    }
 }
