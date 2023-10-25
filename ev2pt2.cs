@@ -36,6 +36,13 @@ namespace ev2pt2
             Console.WriteLine("Ecuaciones no lineales");
             ecuacionesnolineales(anibalx1, anibalx2, mariax1, mariax2);
 
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Bisección");
+            Console.WriteLine(biseccionanibal(anibalx1, anibalx2));
+            Console.WriteLine(biseccionmaria(mariax1, mariax2));
+
+
+
         }
 
         // Método de mínimos cuadrados para x1
@@ -255,6 +262,82 @@ namespace ev2pt2
         //IMPRIMIR EL VALOR X y Y
         Console.WriteLine("Los bebes tendran la misma estatura en el mes " + x + " con una estatura de " + y);
         }
+
+        public static String biseccionanibal(double x1, double x2)
+        {
+            Console.WriteLine("Metodo de biseccion para anibal");
+            double y_inicial, x_inicial = 0, y_final , x_final = 0, x_intermedia=1, y_intermedia=1, paso = 1, criterio = 0.0001;
+            //y (t) = x1 * ln(t) + x2
+            do    
+            {
+            x_inicial = x_final; //AVANZA AL SIGUIENTE INTERVALO
+            y_inicial = x1 * Math.Log(x_inicial) + x2 - 60; //ADAPTAR
+            x_final = x_inicial + paso;
+            y_final = x1 * Math.Log(x_final) + x2-60; //ADAPTAR
+            }
+            while(y_inicial * y_final >0);
+            //BISECCION
+            while( Math.Abs(y_intermedia) > criterio)
+            {
+            //CALCULAR x_intermedia
+            x_intermedia = (x_inicial + x_final) / 2;
+            //CALUCLAR y_internedia y (t) = x1 * ln(t) + x2
+            y_intermedia = x1 * Math.Log(x_intermedia) + x2 - 60; //ADAPTAR
+
+            //COMPARAR CON Y INICIAL O Y FINAL LA Y INTERMEDIA, PARA VALIDAR
+            if(y_final * y_intermedia > 0) //intermedia y final tienen el mismo signo
+            {
+                x_final = x_intermedia;
+                y_final = y_intermedia;
+            }
+            else
+            {
+                x_inicial = x_intermedia;
+                y_inicial = y_intermedia;
+            }
+            }
+
+            return "Raíz: "+ x_intermedia;
+        }
+
+                public static String biseccionmaria(double x1, double x2)
+        {
+            Console.WriteLine("Metodo de biseccion para maria");
+            double y_inicial, x_inicial = 0, y_final , x_final = 0, x_intermedia=1, y_intermedia=1, paso = 1, criterio = 0.0001;
+            //y(t) = x1 * cos(t/8) + x2 * e^(t/10)
+            do    
+            {
+            x_inicial = x_final; //AVANZA AL SIGUIENTE INTERVALO
+            y_inicial = x1 * Math.Cos(x_inicial/8) + x2 * Math.Exp(x_inicial/10) - 60; //ADAPTAR
+            x_final = x_inicial + paso;
+            y_final = x1 * Math.Cos(x_final/8) + x2 * Math.Exp(x_final/10) - 60; //ADAPTAR
+            }
+            while(y_inicial * y_final >0);
+            //BISECCION
+            while( Math.Abs(y_intermedia) > criterio)
+            {
+            //CALCULAR x_intermedia
+            x_intermedia = (x_inicial + x_final) / 2;
+            //CALUCLAR y_internedia y (t) = x1 * ln(t) + x2
+            y_intermedia = x1 * Math.Cos(x_intermedia/8) + x2 * Math.Exp(x_intermedia/10) - 60; //ADAPTAR
+
+            //COMPARAR CON Y INICIAL O Y FINAL LA Y INTERMEDIA, PARA VALIDAR
+            if(y_final * y_intermedia > 0) //intermedia y final tienen el mismo signo
+            {
+                x_final = x_intermedia;
+                y_final = y_intermedia;
+            }
+            else
+            {
+                x_inicial = x_intermedia;
+                y_inicial = y_intermedia;
+            }
+            }
+
+            return "Raíz: "+ x_intermedia;
+        }
+        
+
 
 
     } 
