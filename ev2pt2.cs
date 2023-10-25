@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace ev2pt2
 {
@@ -18,17 +19,23 @@ namespace ev2pt2
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Método de mínimos cuadrados");
-            Console.WriteLine("funcion de Aníbal");
             var anibalx1 = minimoscuadradosx(anibalx, anibalt);
             var anibalx2 = minimoscuadradosx2(anibalx, anibalt);
+            var mariax1 = minimoscuadradosx(mariax, mariat);
+            var mariax2 = minimoscuadradosx2(mariax, mariat);
+
+            Console.WriteLine("Constantes de la ecuación de Anibal");
+            Console.WriteLine("x1 = {0}", anibalx1);
+            Console.WriteLine("x2 = {0}", anibalx2 + "\n");
+            Console.WriteLine("ecuación de Aníbal");
             Console.WriteLine("y(t) = {0} * ln(t) + {1}", anibalx1, anibalx2 + "\n");
 
             Console.WriteLine("--------------------------------------");
 
-            Console.WriteLine("funcion de María");
-            var mariax1 = minimoscuadradosx(mariax, mariat);
-            var mariax2 = minimoscuadradosx2(mariax, mariat);
+            Console.WriteLine("Constantes de la ecuación de María");
+            Console.WriteLine("x1 = {0}", mariax1);
+            Console.WriteLine("x2 = {0}", mariax2 + "\n");
+            Console.WriteLine("ecuación de María");
             Console.WriteLine("y(t) = {0} * cos(t/8) + {1} * e^(t/10)", mariax1, mariax2);
             Console.WriteLine("");
 
@@ -209,12 +216,12 @@ namespace ev2pt2
         static void ecuacionesnolineales(double ax1, double ax2, double mx1, double mx2){
         int ren = 2, col = ren + 1;
         double[,] matriz = new double[ren, col];
-        double x = 4, y = 57, criterio = 0.00001;
+        double x = 2, y = 57, criterio = 0.00001;
         double pivote, factor;
         double funcionanibal = 1, funcionmaria = 1;
         while( Math.Abs(funcionanibal) > criterio  || Math.Abs(funcionmaria)>criterio){
-            funcionanibal = ax1 * Math.Log(x) + ax2 -y;
-            funcionmaria =  mx1 * Math.Cos(x/8) + mx2 * Math.Exp(x/10) -y;
+            funcionanibal = ax1 * Math.Log(x) + ax2 - y;
+            funcionmaria =  mx1 * Math.Cos(x/8) + mx2 * Math.Exp(x/10) - y;
             //PRIMERA FUNCION
             matriz[0,0] = ax1 / x; //ADAPTAR
             matriz[0,1] = -1; //ADAPTAR
@@ -262,7 +269,7 @@ namespace ev2pt2
         }
 
         //IMPRIMIR EL VALOR X y Y
-        Console.WriteLine("Los bebes tendran la misma estatura en el mes " + x + " con una estatura de " + y);
+        Console.WriteLine("Los bebés tendrán la misma estatura de " + y + " a los  " + x + " meses");
         }
 
         public static String biseccionanibal(double x1, double x2)
@@ -299,7 +306,7 @@ namespace ev2pt2
             }
             }
 
-            return "Raíz: "+ x_intermedia;
+            return "La estatura de Anibal será de 60 centímetros a los " + x_intermedia + " meses";
         }
 
                 public static String biseccionmaria(double x1, double x2)
@@ -336,7 +343,7 @@ namespace ev2pt2
             }
             }
 
-            return "Raíz: "+ x_intermedia;
+            return "La estatura de María será de 60 centímetros a los " + x_intermedia + " meses";
         }
 
         //Metodo de la secante
@@ -375,7 +382,7 @@ namespace ev2pt2
             }
             }
 
-            return "Raíz: "+ x_intermedia;
+            return "La estatura de Anibal será de 60 centímetros a los " + x_intermedia + " meses";
         } 
 
                 public static String secanteMaria(double x1, double x2)
@@ -385,6 +392,8 @@ namespace ev2pt2
             do    
             {
             x_inicial = x_final; //AVANZA AL SIGUIENTE INTERVALO
+            //60 = x1 * cos(t/8) + x2 * e^(t/10)
+            //0 = x1 * cos(t/8) + x2 * e^(t/10) - 60
             y_inicial = x1 * Math.Cos(x_inicial/8) + x2 * Math.Exp(x_inicial/10) - 60; //ADAPTAR
             x_final = x_inicial + paso;
             y_final = x1 * Math.Cos(x_final/8) + x2 * Math.Exp(x_final/10) - 60; //ADAPTAR
@@ -412,7 +421,7 @@ namespace ev2pt2
             }
             }
 
-            return "Raíz: "+ x_intermedia;
+            return "La estatura de María será de 60 centímetros a los " + x_intermedia + " meses";
         } 
     }
 }
